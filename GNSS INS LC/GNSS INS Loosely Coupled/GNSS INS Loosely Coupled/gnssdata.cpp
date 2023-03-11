@@ -1,6 +1,6 @@
 #include "gnssdata.h"
 using v3 = Eigen::Vector3d;
-gnssdata& gnssdata::operator=(const gnssdata& other)
+GnssData& GnssData::operator=(const GnssData& other)
 {
 	if (!(this == &other)) {
 		this->m_gpstime = other.m_gpstime;
@@ -12,72 +12,72 @@ gnssdata& gnssdata::operator=(const gnssdata& other)
 	return *this;
 }
 
-double gnssdata::getTime() const
+double GnssData::getTime() const
 {
 	return m_gpstime;
 }
 
-double gnssdata::getB() const
+double GnssData::getB() const
 {
 	return m_blh.b.getrad();
 }
 
-double gnssdata::getL() const
+double GnssData::getL() const
 {
 	return m_blh.l.getrad();
 }
 
-double gnssdata::getH() const
+double GnssData::getH() const
 {
 	return m_blh.h;
 }
 
-double gnssdata::getVn() const
+double GnssData::getVn() const
 {
 	return m_vel(0);
 }
 
-double gnssdata::getVe() const
+double GnssData::getVe() const
 {
 	return m_vel(1);
 }
 
-double gnssdata::getVd() const
+double GnssData::getVd() const
 {
 	return m_vel(2);
 }
 
-v3 gnssdata::getBLHStd() const
+v3 GnssData::getBLHStd() const
 {
 	return m_blhstd;
 }
 
-v3 gnssdata::getVelStd() const
+v3 GnssData::getVelStd() const
 {
 	return m_velstd;
 }
 
-void gnssdata::setTime(double time)
+void GnssData::setTime(double time)
 {
 	m_gpstime = time;
 }
 
-void gnssdata::setBLH(const blh& pos)
+void GnssData::setBLH(const BLH& pos)
 {
 	m_blh = pos;
 }
 
-void gnssdata::setVel(const v3& vel)
+void GnssData::setVel(const v3& vel)
 {
 	m_vel = vel;
 }
 
-void gnssdata::setBLHStd(const v3& blhstd)
+void GnssData::setBLHStd(const v3& blhstd)
 {
 	m_blhstd = blhstd;
 }
 
-void gnssdata::setVelStd(const v3& velstd)
+void GnssData::setVelStd(const v3& velstd)
 {
 	m_velstd = velstd;
 }

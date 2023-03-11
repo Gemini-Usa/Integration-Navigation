@@ -1,15 +1,21 @@
 #pragma once
-class ododata
+class OdoData
 {
 public:
-	ododata()
-		: m_gpstime(0.0), m_vel(0.0)
+	OdoData()
+		: m_gpstime(0.0), m_vel(0.0), m_scal(0.0)
 	{}
-	ododata(double t, double v)
-		: m_gpstime(t), m_vel(v)
+	OdoData(double t, double v)
+		: m_gpstime(t), m_vel(v), m_scal(0.0)
 	{}
+	static OdoData interpolateFrom(const OdoData& formdata, const OdoData& backdata, double time);
+public:
+	double getTime() const;
+	double getVel() const;
+	double getScale() const;
 private:
 	double m_gpstime;
 	double m_vel;
+	double m_scal;
 };
 

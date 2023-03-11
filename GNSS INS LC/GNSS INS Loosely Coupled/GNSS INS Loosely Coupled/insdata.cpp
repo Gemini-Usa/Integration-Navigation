@@ -1,22 +1,22 @@
 #include "insdata.h"
 using v3 = Eigen::Vector3d;
 using m3 = Eigen::Matrix3d;
-double insdata::getTime() const
+double InsData::getTime() const
 {
     return m_gpstime;
 }
 
-v3 insdata::getGyroData() const
+v3 InsData::getGyroData() const
 {
     return m_gyro;
 }
 
-v3 insdata::getAcclData() const
+v3 InsData::getAcclData() const
 {
     return m_accl;
 }
 
-void insdata::Correct(const Eigen::Vector<double, 21>& system, double dt)
+void InsData::Correct(const Eigen::Vector<double, 21>& system, double dt)
 {
     Eigen::Vector3d bg, ba, sg, sa;
     bg = system.segment(9, 3);
@@ -29,7 +29,7 @@ void insdata::Correct(const Eigen::Vector<double, 21>& system, double dt)
     m_accl_scal += sa;
 }
 
-void insdata::Compensate(const insdata& other)
+void InsData::Compensate(const InsData& other)
 {
     m_gyro_bias = other.m_gyro_bias;
     m_gyro_scal = other.m_gyro_scal;
@@ -43,9 +43,9 @@ void insdata::Compensate(const insdata& other)
     m_accl = Sa.inverse() * (m_accl - m_accl_bias);
 }
 
-insdata insdata::interpolateFrom(const insdata& formdata, insdata& backdata, double time)
+InsData InsData::interpolateFrom(const InsData& formdata, InsData& backdata, double time)
 {
-    insdata middledata;
+    InsData middledata;
     middledata.m_gpstime = time;
     // k=(t-t1)/(t2-t1)
     double k = (time - formdata.getTime()) / (backdata.getTime() - formdata.getTime());

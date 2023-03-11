@@ -4,25 +4,25 @@
 #include <Eigen/Dense>
 #include "constant.h"
 #include "angle.h"
-class blh
+class BLH
 {
 	using v3 = Eigen::Vector3d;
 	using m3 = Eigen::Matrix3d;
 public:
-	blh()
+	BLH()
 		: b(0.0), l(0.0), h(0.0)
 	{}
-	blh(angle b, angle l, double h)
+	BLH(Angle b, Angle l, double h)
 		: b(b), l(l), h(h)
 	{}
-	blh(const blh& other)
+	BLH(const BLH& other)
 		: b(other.b), l(other.l), h(other.h)
 	{}
-	blh& operator=(const blh& other);
-	blh& operator-= (const blh& other);
-	blh operator-(const blh& other) const;
-	blh operator+(const blh& other) const;
-	blh operator*(double scalar) const;
+	BLH& operator=(const BLH& other);
+	BLH& operator-= (const BLH& other);
+	BLH operator-(const BLH& other) const;
+	BLH operator+(const BLH& other) const;
+	BLH operator*(double scalar) const;
 	static double getR_M(double phi);
 	static double getR_N(double phi);
 	static double getG_p(double phi, double h);
@@ -31,10 +31,10 @@ public:
 	static v3 getAng_innVec(double phi, double h, double vn, double ve);
 	static m3 getinv_DR(double phi, double h);
 	std::array<double, 3> toxyz() const;
-	std::array<double, 3> getned(const blh& base) const;
+	std::array<double, 3> getned(const BLH& base) const;
 public:
-	angle b;
-	angle l;
+	Angle b;
+	Angle l;
 	double h;
 };
 

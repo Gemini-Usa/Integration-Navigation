@@ -1,5 +1,5 @@
 #include "angle.h"
-angle& angle::operator=(const angle& a)
+Angle& Angle::operator=(const Angle& a)
 {
 	if (this != &a) {
 		this->m_angle = a.m_angle;
@@ -7,76 +7,76 @@ angle& angle::operator=(const angle& a)
 	return *this;
 }
 
-angle angle::operator+(const angle& a) const
+Angle Angle::operator+(const Angle& a) const
 {
-	return angle(this->m_angle + a.m_angle);
+	return Angle(this->m_angle + a.m_angle);
 }
 
-angle angle::operator-(const angle& a) const
+Angle Angle::operator-(const Angle& a) const
 {
-	return angle(this->m_angle - a.m_angle);
+	return Angle(this->m_angle - a.m_angle);
 }
 
-angle angle::operator*(const angle& a) const
+Angle Angle::operator*(const Angle& a) const
 {
-	return angle(this->m_angle * a.m_angle);
+	return Angle(this->m_angle * a.m_angle);
 }
 
-angle angle::operator*(double n) const
+Angle Angle::operator*(double n) const
 {
-	return angle(this->m_angle * n);
+	return Angle(this->m_angle * n);
 }
 
-angle angle::operator/(const angle& a) const
+Angle Angle::operator/(const Angle& a) const
 {
-	return angle(this->m_angle / a.m_angle);
+	return Angle(this->m_angle / a.m_angle);
 }
 
-angle angle::operator/(const double& n) const
+Angle Angle::operator/(const double& n) const
 {
-	return angle(this->m_angle / n);
+	return Angle(this->m_angle / n);
 }
 
-angle& angle::operator+=(const angle& a)
+Angle& Angle::operator+=(const Angle& a)
 {
 	this->m_angle += a.m_angle;
 	return *this;
 }
 
-angle& angle::operator-=(const angle& a)
+Angle& Angle::operator-=(const Angle& a)
 {
 	this->m_angle -= a.m_angle;
 	return *this;
 }
 
-angle& angle::operator*=(const angle& a)
+Angle& Angle::operator*=(const Angle& a)
 {
 	this->m_angle *= a.m_angle;
 	return *this;
 }
 
-angle& angle::operator/=(const angle& a)
+Angle& Angle::operator/=(const Angle& a)
 {
 	this->m_angle /= a.m_angle;
 	return *this;
 }
 
-void angle::set(const long double val)
+void Angle::set(const long double val)
 {
 	this->m_angle = val;
 }
 
-long double angle::getrad() const
+long double Angle::getrad() const
 {
 	return this->m_angle;
 }
 
-long double angle::getdeg() const
+long double Angle::getdeg() const
 {
-	return this->m_angle * angle::R2D;
+	return this->m_angle * Angle::R2D;
 }
 
-Eigen::Quaterniond angle::EulerAngleToQuaternion(double roll, double pitch, double yaw)
+Eigen::Quaterniond Angle::EulerAngleToQuaternion(double roll, double pitch, double yaw)
 {
 	double sinpsi = sin(yaw / 2), cospsi = cos(yaw / 2);
 	double sinthe = sin(pitch / 2), costhe = cos(pitch / 2);
@@ -88,7 +88,7 @@ Eigen::Quaterniond angle::EulerAngleToQuaternion(double roll, double pitch, doub
 	return q;
 }
 
-Eigen::Array3d angle::QuaternionToEulerAngle(const Eigen::Quaterniond& q)
+Eigen::Array3d Angle::QuaternionToEulerAngle(const Eigen::Quaterniond& q)
 {
 	// in format of roll, pitch, yaw
 	Eigen::Array3d angles;
@@ -113,7 +113,7 @@ Eigen::Array3d angle::QuaternionToEulerAngle(const Eigen::Quaterniond& q)
 	return angles;
 }
 
-Eigen::Matrix3d angle::QuaternionToMatrix(const Eigen::Quaterniond& q)
+Eigen::Matrix3d Angle::QuaternionToMatrix(const Eigen::Quaterniond& q)
 {
 	double q0 = q.w();
 	double q1 = q.x();
@@ -126,7 +126,7 @@ Eigen::Matrix3d angle::QuaternionToMatrix(const Eigen::Quaterniond& q)
 	return res;
 }
 
-Eigen::Array3d angle::MatrixToEulerAngle(const Eigen::Matrix3d& DCM)
+Eigen::Array3d Angle::MatrixToEulerAngle(const Eigen::Matrix3d& DCM)
 {
 	// in format of roll, pitch, yaw
 	double pitch = atan2(-DCM(2, 0), sqrt(DCM(2, 1) * DCM(2, 1) + DCM(2, 2) * DCM(2, 2)));
@@ -135,7 +135,7 @@ Eigen::Array3d angle::MatrixToEulerAngle(const Eigen::Matrix3d& DCM)
 	return Eigen::Array3d(roll, pitch, yaw);
 }
 
-void angle::CorrectEulerAngle(Eigen::Vector3d& euler)
+void Angle::CorrectEulerAngle(Eigen::Vector3d& euler)
 {
 	double& roll = euler(2);
 	double& pitch = euler(1);
@@ -148,13 +148,13 @@ void angle::CorrectEulerAngle(Eigen::Vector3d& euler)
 	while (yaw > 2 * M_PI) yaw -= 2 * M_PI;
 }
 
-const angle operator""_deg(long double d)
+const Angle operator""_deg(long double d)
 {
-	return angle(d * angle::D2R);
+	return Angle(d * Angle::D2R);
 }
 
-const angle operator""_rad(long double d)
+const Angle operator""_rad(long double d)
 {
-	return angle(d);
+	return Angle(d);
 }
 

@@ -4,17 +4,17 @@
 #include <fstream>
 #include <Eigen/Dense>
 #include "gnssdata.h"
-class gnssfile
+class GnssFile
 {
 public:
-	gnssfile()
+	GnssFile()
 		: m_filename()
 	{}
-	gnssfile(const std::string& filename)
+	GnssFile(const std::string& filename)
 		: m_filename(filename)
 	{}
-	static void parseDataString(const std::string& str, gnssdata& gd);
-	void readGnssData(std::vector<gnssdata>& gd) const;
+	static void parseDataString(const std::string& str, GnssData& gd);
+	void readGnssData(std::vector<GnssData>& gd) const;
 private:
 	std::string m_filename;
 };

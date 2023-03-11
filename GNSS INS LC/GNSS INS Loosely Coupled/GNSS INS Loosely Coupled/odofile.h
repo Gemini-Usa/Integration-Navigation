@@ -3,16 +3,16 @@
 #include <vector>
 #include <fstream>
 #include "ododata.h"
-class odofile
+class OdoFile
 {
 public:
-	odofile()
+	OdoFile()
 		: m_filename()
 	{}
-	odofile(const std::string& filename)
+	OdoFile(const std::string& filename)
 		: m_filename(filename)
 	{}
-	void readOdometerData(std::vector<ododata>& od) const;
+	void readOdometerData(std::vector<OdoData>& od) const;
 private:
 	std::string m_filename;
 };

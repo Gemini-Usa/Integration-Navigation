@@ -3,37 +3,37 @@
 #include <Eigen/Geometry>
 #include "blh.h"
 #include "insdata.h"
-class insstate
+class InsState
 {
 	using v3 = Eigen::Vector3d;
 	using qt = Eigen::Quaterniond;
 public:
 	// ctor
-	insstate()
+	InsState()
 		: gpstime(0.0), pos(), vel(), att()
 	{}
-	insstate(double t, const blh& p, const v3& v, const qt& a)
+	InsState(double t, const BLH& p, const v3& v, const qt& a)
 		: gpstime(t), pos(p), vel(v), att(a)
 	{}
-	insstate(const insstate& other)
+	InsState(const InsState& other)
 		: gpstime(other.gpstime), pos(other.pos), vel(other.vel), att(other.att)
 	{}
-	insstate& operator=(const insstate& other);
+	InsState& operator=(const InsState& other);
 private:
 	// private function
 	void TimeUpt(double t);
-	void AttUpt(const insstate& prevs, const v3& currgyro, const v3& prevgyro);
-	void VelUpt(const insstate& prevs, const insstate& pprevs,
+	void AttUpt(const InsState& prevs, const v3& currgyro, const v3& prevgyro);
+	void VelUpt(const InsState& prevs, const InsState& pprevs,
 		const v3& currgyro, const v3& prevgyro,	const v3& curraccl, const v3& prevaccl);
-	void PosUpt(const insstate& prevs);
-	insstate extrapolateTo(const insstate& prevs, const insstate& pprevs, double time);
+	void PosUpt(const InsState& prevs);
+	InsState extrapolateTo(const InsState& prevs, const InsState& pprevs, double time);
 public:
 	// public function
-	void Update(const insstate& prevs, const insstate& pprevs, const insdata& currd, const insdata& prevd);
+	void Update(const InsState& prevs, const InsState& pprevs, const InsData& currd, const InsData& prevd);
 	void Correct(const Eigen::Vector<double, 21>& system_vector);
 public:
 	double gpstime;
-	blh pos;
+	BLH pos;
 	v3 vel;
 	qt att;
 };

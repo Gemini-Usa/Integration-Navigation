@@ -2,35 +2,35 @@
 #include <corecrt_math_defines.h>
 #include <Eigen/Dense>
 #include <utility>
-class angle;
-const angle operator""_deg(long double d);
-const angle operator""_rad(long double d);
-class angle
+class Angle;
+const Angle operator""_deg(long double d);
+const Angle operator""_rad(long double d);
+class Angle
 {
 public:
-	angle()
+	Angle()
 		: m_angle(0.0)
 	{}
-	explicit angle(long double a)
+	explicit Angle(long double a)
 		: m_angle(a)
 	{}
-	angle(const angle& a)
+	Angle(const Angle& a)
 		: m_angle(a.m_angle)
 	{}
 	static constexpr long double D2R = M_PI / 180.0;
 	static constexpr long double R2D = 180.0 / M_PI;
 
-	angle& operator=(const angle& a);
-	angle operator+(const angle& a) const;
-	angle operator-(const angle& a) const;
-	angle operator*(const angle& a) const;
-	angle operator*(double n) const;
-	angle operator/(const angle& a) const;
-	angle operator/(const double& n) const;
-	angle& operator+=(const angle& a);
-	angle& operator-=(const angle& a);
-	angle& operator*=(const angle& a);
-	angle& operator/=(const angle& a);
+	Angle& operator=(const Angle& a);
+	Angle operator+(const Angle& a) const;
+	Angle operator-(const Angle& a) const;
+	Angle operator*(const Angle& a) const;
+	Angle operator*(double n) const;
+	Angle operator/(const Angle& a) const;
+	Angle operator/(const double& n) const;
+	Angle& operator+=(const Angle& a);
+	Angle& operator-=(const Angle& a);
+	Angle& operator*=(const Angle& a);
+	Angle& operator/=(const Angle& a);
 
 	void set(const long double val);
 	long double getrad() const;
